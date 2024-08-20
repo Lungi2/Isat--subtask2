@@ -61,4 +61,16 @@ string decToBinary(int n) {
     }
     return binary;
 }
+// Function 2: Binary to Decimal
+int binToDecimal(string n) {
+    int decimalNum = 0;
+    int base = 1;
+    int len = n.length();
+    for (int i = len - 1; i >= 0; i--) {
+        if (n[i] == '1')
+            decimalNum += base;
+        base = base * 2;
+    }
+    return decimalNum;
+}
 
