@@ -102,6 +102,29 @@ int hexToDecimal(string hex) {
 int main() {
     int decimal;
     string binary, hex;
+    // Decimal to Binary
+    cout << "Enter a decimal number: ";
+    cin >> decimal;
+    cout << decimal << " in decimal = " << decToBinary(decimal) << " in binary" << endl;
+
+    // Binary to Decimal
+    cout << "Enter a binary number: ";
+    cin >> binary;
+    cout << binary << " in binary = " << binToDecimal(binary) << " in decimal" << endl;
+
+    // Decimal to Hexadecimal
+    cout << "Enter a decimal number: ";
+    cin >> decimal;
+    cout << decimal << " in decimal = " << decToHex(decimal) << " in hexadecimal" << endl;
+
+    // Hexadecimal to Decimal
+    cout << "Enter a hexadecimal number: ";
+    cin >> hex;
+    cout << hex << " in hexadecimal = " << hexToDecimal(hex) << " in decimal" << endl;
+
+    return 0;
+}
+ 
 
 
 
