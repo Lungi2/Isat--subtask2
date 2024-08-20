@@ -83,5 +83,25 @@ string decToHex(int n) {
     }
     return hex;
 }
+// Function 4: Hexadecimal to Decimal
+int hexToDecimal(string hex) {
+    int decimalNum = 0;
+    int base = 1;
+    int len = hex.length();
+    for (int i = len - 1; i >= 0; i--) {
+        if (hex[i] >= '0' && hex[i] <= '9') {
+            decimalNum += (hex[i] - 48) * base;
+        } else if (hex[i] >= 'A' && hex[i] <= 'F') {
+            decimalNum += (hex[i] - 55) * base;
+        }
+        base = base * 16;
+    }
+    return decimalNum;
+}
+
+int main() {
+    int decimal;
+    string binary, hex;
+
 
 
