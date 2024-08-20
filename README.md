@@ -1,130 +1,117 @@
-# Isat--subtask2
-#include <iostream>
-using namespace std;
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <math.h>
 
-void decToBinary(int n) {
-    int binaryNum[32];
-    int i = 0;
-    while (n > 0) {
-        binaryNum[i] = n % 2;
-        n = n / 2;
-        i++;
+// Function to convert decimal to binary
+void decimalToBinary(int decimal) {
+    if (decimal == 0) {
+        printf("0");
+        return;
     }
-    for (int j = i - 1; j >= 0; j--)
-        cout << binaryNum[j];
-}
 
-int main() {
-    int n;
-    cout << "Enter a decimal number: ";
-    cin >> n;
-    cout << n << " in decimal = ";
-    decToBinary(n);
-    cout << " in binary" << endl;
-    return 0;
-}
+    int binary[32];
+    int index = 0;
 
-#include <iostream>
-#include <cmath>
-using namespace std;
-
-int binToDecimal(long long n) {
-    int decimalNum = 0, i = 0, rem;
-    while (n != 0) {
-        rem = n % 10;
-        n /= 10;
-        decimalNum += rem * pow(2, i);
-        ++i;
+    while (decimal > 0) {
+        binary[index++] = decimal % 2;
+        decimal /= 2;
     }
-    return decimalNum;
+
+    // Print binary in reverse order
+    for (int i = index - 1; i >= 0; i--) {
+        printf("%d", binary[i]);
+    }
 }
 
-int main() {
-    long long n;
-    cout << "Enter a binary number: ";
-    cin >> n;
-    cout << n << " in binary = " << binToDecimal(n) << " in decimal" << endl;
-    return 0;
-}
+// Function to convert binary to decimal
+int binaryToDecimal(const char *binary) {
+    int decimal = 0;
+    int length = strlen(binary);
 
-#include <iostream>
-#include <cmath>
-#include <string>
-using namespace std;
-
-// Function 1: Decimal to Binary
-string decToBinary(int n) {
-    string binary = "";
-    while (n > 0) {
-        binary = to_string(n % 2) + binary;
-        n = n / 2;
-    }
-    return binary;
-}
-// Function 2: Binary to Decimal
-int binToDecimal(string n) {
-    int decimalNum = 0;
-    int base = 1;
-    int len = n.length();
-    for (int i = len - 1; i >= 0; i--) {
-        if (n[i] == '1')
-            decimalNum += base;
-        base = base * 2;
-    }
-    return decimalNum;
-}
-// Function 3: Decimal to Hexadecimal
-string decToHex(int n) {
-    string hex = "";
-    char hexChars[] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'};
-    while (n > 0) {
-        hex = hexChars[n % 16] + hex;
-        n = n / 16;
-    }
-    return hex;
-}
-// Function 4: Hexadecimal to Decimal
-int hexToDecimal(string hex) {
-    int decimalNum = 0;
-    int base = 1;
-    int len = hex.length();
-    for (int i = len - 1; i >= 0; i--) {
-        if (hex[i] >= '0' && hex[i] <= '9') {
-            decimalNum += (hex[i] - 48) * base;
-        } else if (hex[i] >= 'A' && hex[i] <= 'F') {
-            decimalNum += (hex[i] - 55) * base;
+    for (int i = 0; i < length; i++) {
+        if (binary[length - i - 1] == '1') {
+            decimal += (int)pow(2, i);
         }
-        base = base * 16;
     }
-    return decimalNum;
+
+    return decimal;
+}
+
+// Function to convert decimal to hexadecimal
+void decimalToHexadecimal(int decimal) {
+    if (decimal == 0) {
+        printf("0");
+        return;
+    }
+
+    char hex[100];
+    int index = 0;
+
+    while (decimal > 0) {
+        int remainder = decimal % 16;
+        if (remainder < 10) {
+            hex[index++] = remainder + '0';
+        } else {
+            hex[index++] = remainder - 10 + 'A';
+        }
+        decimal /= 16;
+    }
+
+    // Print hexadecimal in reverse order
+    for (int i = index - 1; i >= 0; i--) {
+        printf("%c", hex[i]);
+    }
+}
+
+// Function to convert hexadecimal to decimal
+int hexadecimalToDecimal(const char *hex) {
+    int decimal = 0;
+    int length = strlen(hex);
+
+    for (int i = 0; i < length; i++) {
+        char c = hex[length - i - 1];
+        int value;
+
+        if (c >= '0' && c <= '9') {
+            value = c - '0';
+        } else if (c >= 'A' && c <= 'F') {
+            value = c - 'A' + 10;
+        } else {
+            // Invalid hexadecimal character
+            return -1;
+        }
+
+        decimal += value * (int)pow(16, i);
+    }
+
+    return decimal;
 }
 
 int main() {
     int decimal;
-    string binary, hex;
-    // Decimal to Binary
-    cout << "Enter a decimal number: ";
-    cin >> decimal;
-    cout << decimal << " in decimal = " << decToBinary(decimal) << " in binary" << endl;
+    char binary[33];
+    char hex[100];
 
-    // Binary to Decimal
-    cout << "Enter a binary number: ";
-    cin >> binary;
-    cout << binary << " in binary = " << binToDecimal(binary) << " in decimal" << endl;
+    // Example: Decimal to Binary
+    decimal = 29;
+    printf("Decimal to Binary: %d = ", decimal);
+    decimalToBinary(decimal);
+    printf("\n");
 
-    // Decimal to Hexadecimal
-    cout << "Enter a decimal number: ";
-    cin >> decimal;
-    cout << decimal << " in decimal = " << decToHex(decimal) << " in hexadecimal" << endl;
+    // Example: Binary to Decimal
+    strcpy(binary, "11101");
+    printf("Binary to Decimal: %s = %d\n", binary, binaryToDecimal(binary));
 
-    // Hexadecimal to Decimal
-    cout << "Enter a hexadecimal number: ";
-    cin >> hex;
-    cout << hex << " in hexadecimal = " << hexToDecimal(hex) << " in decimal" << endl;
+    // Example: Decimal to Hexadecimal
+    decimal = 255;
+    printf("Decimal to Hexadecimal: %d = ", decimal);
+    decimalToHexadecimal(decimal);
+    printf("\n");
+
+    // Example: Hexadecimal to Decimal
+    strcpy(hex, "FF");
+    printf("Hexadecimal to Decimal: %s = %d\n", hex, hexadecimalToDecimal(hex));
 
     return 0;
 }
- 
-
-
-
