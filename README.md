@@ -73,4 +73,15 @@ int binToDecimal(string n) {
     }
     return decimalNum;
 }
+// Function 3: Decimal to Hexadecimal
+string decToHex(int n) {
+    string hex = "";
+    char hexChars[] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'};
+    while (n > 0) {
+        hex = hexChars[n % 16] + hex;
+        n = n / 16;
+    }
+    return hex;
+}
+
 
